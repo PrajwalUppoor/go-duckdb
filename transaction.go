@@ -1,11 +1,15 @@
 package duckdb
 
 import "context"
-
+import "C"
+type conn struct {
+	con    *C.duckdb_connection
+	closed bool
+	tx     bool
+}
 type tx struct {
 	c *con
 }
-
 func (t *tx) Commit() error {
 	if t.c == nil || !t.c.tx {
 		panic("database/sql/driver: misuse of duckdb driver: extra Commit")
