@@ -8,7 +8,7 @@ type conn struct {
 	tx     bool
 }
 type tx struct {
-	c *con
+	c *conn
 }
 func (t *tx) Commit() error {
 	if t.c == nil || !t.c.tx {
